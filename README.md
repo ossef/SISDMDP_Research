@@ -47,7 +47,7 @@ Tree of the most important files and folder in the project's repository :
 
 <br>
 <div align="center">
-    <img src="MDP_Case_6.png" width="800" height="600"/>
+    <img src="ScreenShot.png" width="800" height="600"/>
 </div>
 <br>
      
