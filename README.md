@@ -42,6 +42,14 @@ Tree of the most important files and folder in the project's repository :
         - You can comment/uncomment specific algorithms in the code to customize the test
     - test_confidence_interval_normalized(n_runs):
         - Repeats the test_algorithms() process n_runs times to obtain a 95% confidence interval.
+
+#### Example for ($|A|=200$, $N=5000$, $K=10$) configuration in discounted $(\gamma=0.9)$ reward:
+
+<br>
+<div align="center">
+    <img src="MDP_Case_6.png" width="800" height="600"/>
+</div>
+<br>
      
 ##  Contributors
 
