@@ -43,32 +43,39 @@ Tree of the most important files and folder in the project's repository :
     - test_confidence_interval_normalized(n_runs):
         - Repeats the test_algorithms() process n_runs times to obtain a 95% confidence interval.
 
-#### Test of ($|A|=200$, $N=5000$, $K=10$) configuration: 
-##### A) In Discounted $(\gamma=0.9)$ reward:
+## IV - Results of ($|A|=200$, $N=5000$, $K=10$) configuration: 
 
+- In Discounted $(\gamma=0.9)$ reward, with `test_algorithms()` function: 
 <br>
 <div align="center">
     <img src="Screen_Shots/ScreenShot_DSC.png" width="500" height="140"/>
 </div>
 <br>
 
-##### B) In Average reward:
-
+- In Average reward, with `test_algorithms()` function: 
 <br>
 <div align="center">
     <img src="Screen_Shots/ScreenShot_AVG.png" width="500" height="90"/>
 </div>
 <br>
 
+- In Discounted $(\gamma=0.9)$ reward, with `test_confidence_interval_normalized(n_runs=30)` function: <br>
+(Each algorithm is run 30 times)
+<br>
+<div align="center">
+    <img src="Screen_Shots/Results_IC_95.png" width="500" height="75"/>
+</div>
+<br>
 
-     
 ##  Contributors
 
 - [Youssef AIT EL MAHJOUB](https://github.com/ossef)
 - Salma Alouah
 
-Original article, [1]: "Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process", Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. Submitted to, 18th EAI International Conference on Performance Evaluation Methodologies and Tools, Valuetools, 2018.
+Original article [1]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process", Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. Submitted to, 18th EAI International Conference on Performance Evaluation Methodologies and Tools, Valuetools, 2018.
 
-Some related articles: https://authors.elsevier.com/a/1lU75VwcQvf4y, https://ieeexplore.ieee.org/abstract/document/10770514/
-
-          
+Some related articles: <br> 
+https://authors.elsevier.com/a/1lU75VwcQvf4y <br>
+https://ieeexplore.ieee.org/abstract/document/10770514/ <br>
+https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling <br>
+https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
