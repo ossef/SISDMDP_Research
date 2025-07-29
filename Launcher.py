@@ -149,35 +149,34 @@ def generate_Synthetic_SISDMDP(k, N, A, epsilon=1e-3):
 
 def test_algorithms() :
     """------------1) SISDMDP Generation -----------------------"""
-    K, N, A = 10, 10000, 1000
+    K, N, A = 10, 5000, 200
     ALL_P, R, N, A, Parts = generate_Synthetic_SISDMDP(K, N, A)
 
     """----------- 2) Solving Average reward criteria ----------"""
     relative_state = Parts[0][0]  #Only for Average reward !
-    #rho_RB, policy_RRB, time_RRB, k_RRB  = average_policy_Iteration_Csr_Chiu_Rob(ALL_P, R, N, A, Parts, relative_state)
-    #rho_RC, policy_RC, time_RC, k_RC     = average_policy_Iteration_Csr_Chiu(ALL_P, R, N, A, Parts, relative_state)
-    #rho_GJ, policy_RGJ, time_RGJ, k_RGJ  = average_policy_Iteration_Csr_GJ(ALL_P, R, N, A, relative_state)
-    #rho_FP, policy_RFP, time_RFP, k_RFP  = average_policy_Iteration_Csr_FP(ALL_P, R, N, A, relative_state)
-    #rho_RVI, policy_RVI, time_RVI, k_RVI = average_relative_Value_Iteration_Csr(ALL_P, R, N, A, relative_state)
+    rho_RB, policy_RRB, time_RRB, k_RRB  = average_policy_Iteration_Csr_Chiu_Rob(ALL_P, R, N, A, Parts, relative_state)
+    rho_RC, policy_RC, time_RC, k_RC     = average_policy_Iteration_Csr_Chiu(ALL_P, R, N, A, Parts, relative_state)
+    rho_GJ, policy_RGJ, time_RGJ, k_RGJ  = average_policy_Iteration_Csr_GJ(ALL_P, R, N, A, relative_state)
+    rho_FP, policy_RFP, time_RFP, k_RFP  = average_policy_Iteration_Csr_FP(ALL_P, R, N, A, relative_state)
+    rho_RVI, policy_RVI, time_RVI, k_RVI = average_relative_Value_Iteration_Csr(ALL_P, R, N, A, relative_state)
 
-    #print(f'\nAVG Results : K={K}, N={N}, A={A}')
-    #print(f'--> RPI_RB  : rau = {rho_RB} , time = {time_RRB}, iter = {k_RRB}')
-    #print(f'--> RPI_RC  : rau = {rho_RC} , time = {time_RC}, iter = {k_RC}')
-    #print(f'--> RPI_GJ  : rau = {rho_GJ} , time = {time_RGJ}, iter = {k_RGJ}')
-    #print(f'--> RPI_FP  : rau = {rho_FP} , time = {time_RFP}, iter = {k_RFP}')
-    #print(f'--> RVI     : rau = {rho_RVI} , time = {time_RVI}, iter = {k_RVI}')
+    print(f'\nAVG Results : K={K}, N={N}, A={A}')
+    print(f'--> RPI_RB  : rau = {rho_RB} , time = {time_RRB}, iter = {k_RRB}')
+    print(f'--> RPI_RC  : rau = {rho_RC} , time = {time_RC}, iter = {k_RC}')
+    print(f'--> RPI_GJ  : rau = {rho_GJ} , time = {time_RGJ}, iter = {k_RGJ}')
+    print(f'--> RPI_FP  : rau = {rho_FP} , time = {time_RFP}, iter = {k_RFP}')
+    print(f'--> RVI     : rau = {rho_RVI} , time = {time_RVI}, iter = {k_RVI}')
 
-    '''
     vals = np.array([rho_FP, rho_GJ, rho_RB, rho_RVI, rho_RC])
     are_close = np.ptp(vals) <= 1e-8
     if(are_close == True or all(a == b == c == d == e  for a,b,c,d,e in zip(policy_RFP,policy_RGJ,policy_RRB,policy_RVI, policy_RC)) ):
         print("--------> Policy Similarity OK !")
     else :
         print("--------> Policy Similarity KO !")
-    '''
 
 
     """---------- 3) Solving Discounted reward criteria ----------"""
+    """
     d_factor = 0.9        #Only for Discounted reward !
     policy_RB, time_RB, k_RB = discount_policy_Iteration_Csr_Chiu_Rob(ALL_P, R, N, A, Parts, d_factor)
     policy_VI, time_VI, k_VI = discount_Value_Iteration_Csr(ALL_P, R, N, A, d_factor)
@@ -194,6 +193,7 @@ def test_algorithms() :
         print("--------> Policy Similarity OK !")
     else :
         print("--------> Policy Similarity KO !")
+    """
 
 def test_confidence_interval_normalized(n_runs):
     """

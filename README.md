@@ -43,13 +43,24 @@ Tree of the most important files and folder in the project's repository :
     - test_confidence_interval_normalized(n_runs):
         - Repeats the test_algorithms() process n_runs times to obtain a 95% confidence interval.
 
-#### Example for ($|A|=200$, $N=5000$, $K=10$) configuration in discounted $(\gamma=0.9)$ reward:
+#### Test of ($|A|=200$, $N=5000$, $K=10$) configuration: 
+##### A) In Discounted $(\gamma=0.9)$ reward:
 
 <br>
 <div align="center">
-    <img src="ScreenShot.png" width="800" height="600"/>
+    <img src="Screen_Shots/ScreenShot_DSC.png" width="500" height="140"/>
 </div>
 <br>
+
+##### B) In Average reward:
+
+<br>
+<div align="center">
+    <img src="Screen_Shots/ScreenShot_AVG.png" width="500" height="90"/>
+</div>
+<br>
+
+
      
 ##  Contributors
 
