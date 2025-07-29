@@ -12,14 +12,17 @@ Tree of the most important files and folder in the project's repository :
 
 ```
 /
-├── generate_matrix.py        # Generating a SISDMC-SC structured Markov chain to use in "Launcher.py"
-├── gth_full.py               # GTH algorithm : steady-state probability distribution
-├── chiu_classic.py           # Chiu and Feinberg algorithm : for steady-state probability distribution
-├── chiu_ROB.py               # Proposed algorithm (Chiu + Rob-B) : for steady-state probability distribution
-├── Solve_AVG_DSC_Reward.py   # Solving average reward (5 algorithms) and discounted reward (4 algorithms)
-│                             # The proposed algorithms are : MRPI + Chiu, MRPI + Chiu+ RobB and PI + Chiu+ RobB
-├── Launcher.py               # Script to run experiments on synthetic generated SISDMDPs 
-└───README.md                 # Project description and instructions
+├───ScreenShots/: contains some screenshots for below explanations
+├─┬─Solve/: contains the source code for the MDP solving
+│ ├── generate_matrix.py        # Generating a SISDMC-SC structured Markov chain to use in "Launcher.py"
+│ ├── gth_full.py               # GTH algorithm: steady-state probability distribution
+│ ├── chiu_classic.py           # Chiu and Feinberg algorithm: for steady-state probability distribution
+│ ├── chiu_ROB.py               # Proposed algorithm (Chiu + Rob-B): for steady-state probability distribution
+│ ├── Solve_AVG_DSC_Reward.py   # Solving MDPs: average reward (5 algorithms) and discounted reward (4 algorithms)
+│ │                             # The proposed algorithms are: MRPI + Chiu, MRPI + Chiu+ RobB, and PI + Chiu+ RobB
+│ └──Launcher.py                # Script to run the experiments on synthetic generated SISDMDPs 
+│
+└───README.md                   # Framework description and instructions
 ```
 
 ## III - Usage 
@@ -48,14 +51,14 @@ Tree of the most important files and folder in the project's repository :
 - In Discounted $(\gamma=0.9)$ reward, with `test_algorithms()` function: 
 <br>
 <div align="center">
-    <img src="Screen_Shots/ScreenShot_DSC.png" width="500" height="140"/>
+    <img src="ScreenShots/ScreenShot_DSC.png" width="500" height="140"/>
 </div>
 <br>
 
 - In Average reward, with `test_algorithms()` function: 
 <br>
 <div align="center">
-    <img src="Screen_Shots/ScreenShot_AVG.png" width="500" height="90"/>
+    <img src="ScreenShots/ScreenShot_AVG.png" width="500" height="90"/>
 </div>
 <br>
 
@@ -63,7 +66,7 @@ Tree of the most important files and folder in the project's repository :
 (Each algorithm is run 30 times)
 <br>
 <div align="center">
-    <img src="Screen_Shots/Results_IC_95.png" width="500" height="75"/>
+    <img src="ScreenShots/Results_IC_95.png" width="500" height="75"/>
 </div>
 <br>
 
