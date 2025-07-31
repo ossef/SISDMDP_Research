@@ -75,7 +75,7 @@ Tree of the most important files and folder in the project's repository :
 - [Youssef AIT EL MAHJOUB](https://github.com/ossef)
 - [Salma Alouah](https://github.com/salouah003)
 
-Original article [1]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process", Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. Submitted to, 18th EAI International Conference on Performance Evaluation Methodologies and Tools, Valuetools, 2018.
+Original article [1]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process", Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. Submitted to, 18th EAI International Conference on Performance Evaluation Methodologies and Tools, Valuetools, 2025.
 
 Some related articles: <br> 
 https://authors.elsevier.com/a/1lU75VwcQvf4y <br>
