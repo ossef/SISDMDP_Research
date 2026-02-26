@@ -1,0 +1,60 @@
+# -----------! pour lancer et obtenir temps d'execution en seconde du script : "time -p ./script" !--------------
+
+#!/bin/bash
+
+BufferSize='45'    # Battery capacity
+cities=('Barcelona' 'Unalaska' 'Moscow' 'Paris' 'Rabat' 'Tokyo' 'Athens' 'Reykjavik' 'London' 'Yaounde' 'Santiago')
+ncities='11'
+
+# Compilation
+gcc -O2 generMarkov.c -o genMarkov
+gcc -O2 Re-order-Matrice-New.c -o ReOrder-New
+gcc -O2 bis-newgthcreux.c -o sparsegthLD
+gcc -O2 Lam2TGF.c -o lamtgf
+
+# Generate Actions distributions
+K=4     # Correspond à "NbRelease" dans "const.h"
+DEN=5   # Diviseur (i.e pas) pour creer les vecteurs de proba
+ACTIONS_FILE="Actions.txt"
+python3 generActions.py --k "$K" --den "$DEN" --out "$ACTIONS_FILE"
+
+Actions=$(head -n 1 "$ACTIONS_FILE")
+
+# Loop over cities
+for ((k=1; k<=ncities; k++)); do
+
+    CITY="${cities[k-1]}"
+    mkdir -p "./$CITY"
+
+    for ((i=0; i<Actions; i++)); do #((i=0; i<Actions; i++))
+
+        model="${CITY}_a${i}"
+
+        # Remove old files (inside city directory)
+        rm -f "./$CITY/$model.cd" \
+              "./$CITY/$model.sz" \
+              "./$CITY/$model.Rii" \
+              "./$CITY/$model.pi" \
+              "./$CITY/$model.part"
+
+        ./genMarkov -f "$model" "$BufferSize" "$i" "$CITY"
+
+        #./sparsegthLD -f "$model" "$CITY"
+
+        ./ReOrder-New "$model" "$CITY"
+
+        ./lamtgf -f "$model-reordre" "$CITY"
+
+        # Cleanup temporary files (inside city directory)
+        rm -f "./$CITY/$model.cd" \
+              "./$CITY/$model.sz" \
+              "./$CITY/$model.Rii" \
+              "./$CITY/$model.pi"
+
+    done
+done
+
+
+
+
+
