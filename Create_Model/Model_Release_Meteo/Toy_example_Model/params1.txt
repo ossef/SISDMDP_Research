@@ -1,0 +1,24 @@
+BufferSize='5';  #Capacité de la file, 6
+deadline='2';    #Deadline de remplissage, 3
+
+
+#define NbArrivals        3   /*nombre d'arrivée, arrivées Batch {0,1,2,3} */
+#define NbService         2   /*Service Bernouilli {0,1} */
+#define NbRelease         2   /*Battery release {0,1} change de superstate */
+#define NbPhaseMeteo      2   /*Number of phases de Meteo */
+#define NbEvtsPossibles   NbArrivals*NbRelease*NbService*NbPhaseMeteo  /*nombre de vecteurs d'arrivees possibles*/
+
+int a[NbArrivals] = {0, 1, 2}; 
+int b[NbService] = {0, 1};
+int c[NbRelease] = {0, 1};
+int d[NbPhaseMeteo] = {0, 1}; //{0, 1};
+
+//Not depending on action
+double pa[NbArrivals] = {0.2, 0.4, 0.4};    //proba of arrivals
+
+//pService in each superState : 
+// Superstate 0 : TypeDebut = 0
+// Superstate 1 : TypeDebut = Buffer/2
+
+double pService[NbRelease] = {0.1, 0.1};       //Bernouilli service, for each action
+double pService[NbRelease] = {0.72, 0.28}      // DEPENDS on action vector

@@ -84,3 +84,7 @@ https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_a
 https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ed6b62 (Replace Solve & Create Model)
