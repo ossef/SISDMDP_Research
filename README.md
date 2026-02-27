@@ -6,7 +6,7 @@ This framework provides an efficient method for computing the optimal policy in 
 
 It supports both average and discounted reward criteria, as well as CSR sparse models. The SISDMDP framework generalizes the structured models analyzed in previous work (<a href="https://github.com/ossef/MDP_Battery" target="_blank">MDP_Battery</a>), offering a scalable solution suitable for large-scale decomposable decision-making problems.
 
-The proposed solution method is applied to a data-driven (<a href="https://pvwatts.nlr.gov/" target="_blank">NREL</a>) PhotoVoltaic energy storage application that optimizes several rewards (energy release, QoS delay, and energy loss). It provides a detailed analysis of the optimal policy and compares optimal performance metrics across different cities with distinct meteorological profiles.
+The proposed solution method is applied to a data-driven (<a href="https://pvwatts.nlr.gov/" target="_blank">NREL</a>) PhotoVoltaic energy storage application that optimizes several rewards (energy release, QoS delay, and energy loss) [2]. It provides a detailed analysis of the optimal policy and compares optimal performance metrics across different cities with distinct meteorological profiles.
 
 
 ## II - Project architecture
@@ -98,19 +98,47 @@ Results of ($|A|=200$, $N=5000$, $K=10$) configuration:
 <br>
 
 ## V - Data-driven PV energy storage application: 
+The formal description of the data-driven SISDMDP model is described in [2]. To run the application we will have to preprocess PhotoVoltaic energy production of Raw data (`/Models/SIMPA_Journal_Model/NREL_Data`). 
 
-##  Contributors
+### Data-driven SISDMDP generation and solving
+
+1) Execute the python code 'Dist_gener.py' in `/Models/SIMPA_Journal_Model/`: this code tranforms the Raw data of each city to discrete units energy distribution for each hour of the day, clustered by four wheater regimes (Very cloudy, Cloudy, Partly cloudy, Clear sky). After execution one can find the distributions in `/Models/SIMPA_Journal_Model/NREL_Extracts`. To test different scenarios, one can modify parameters in header part as Packets size and active hours interval. The average execution time (in a classical M1 laptop) of this script is 80 seconds, that inlcudes distributions generations of 11 cities model.
+
+2) Execute 'scriptMDP' file in `/Models/SIMPA_Journal_Model/NREL_Model`: this script generates actions (generActions.py) then uses the C code of Xborne framework to generate the data-driven SISDMDP based on distributions in `/Models/SIMPA_Journal_Model/NREL_Extracts`. After running, the ready to solve models are therefore stored in `/Models/SIMPA_Journal_Model/NREL_Model` in cities named folders. Here, we only give models of 'Athens' an 'Barcelona' due to GitHub size limitations (the complete project is of size 20 Go). To test different scenarios, one can modify the Buffersize or actions generations file. However, to alter the kernel structure of the MDP, manipulation of Xborne is required, particularly with 'fun.c' file, which encodes the structure of a Markov Chain, including the description of states, various events, transitions, and their probabilities. The average execution time of this script is 5 minutes, that inlcudes the generation of 11 cities SISDMDP model, where each model contains 56 actions, each action describe a probabilistic matrix of about N=45000 states and 250000 arcs, and 184 superstates.
+
+3) Now that `/Models/SIMPA_Journal_Model/NREL_Model` is ready, we can run two types of experiments in 'analyze_PV_Model()' function of  `/Solve_SISDMDP/Launcher.py` file. First, specify the rewards variables r1_by_M (Energy Packet release), r2 (EP-Energy Packet loss penalty), r3 (DP-Data Packets delay) then :
+   - ANALYZE = 1 : fixe the name of a SISDMDP city model and run `Launcher.py` file. The detailled results of the optimal policy will be stored in `/Results/HeatMaps/` folder.
+   - ANALYZE = 2 : specify the name of cities you want to compare, then run `Launcher.py` file. The detailled results of average measures will be stored in `/Results/Barplots/` folder.
+
+### Data-driven SISDMDP execution and results
+For instance will running the four scenarios in [2] 
+ - Agressive DP delay minimization    : r1_by_M= [0,0,0,0],         r2= 0,    r3= -1000
+ - Agressive EP overflow minimization : r1_by_M= [0,0,0,0],         r2= -0.5, r3= 0
+ - Regime dependent EP selling        : r1_by_M= [0.2,0.4,0.6,0.8], r2= 0,    r3= 0
+ - Multi-Objective optimization       : r1_by_M= [0.2,0.4,0.6,0.8], r2= -0.5, r3= -1000
+
+Using the experiment "ANALYZE=1", we obtain :
+
+<br>
+<div align="center">
+    <img src="./Screenshots/Optimal_policy.png" width="800" height="400"/>
+</div>
+<br>
+
 
 - [Youssef AIT EL MAHJOUB](https://github.com/ossef)
 - [Salma Alouah](https://github.com/salouah003)
 
-Original article [1]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process", Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. Pre-print document, https://arxiv.org/abs/2508.00816, 2025.
+Preliminary article [1]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. Pre-print, https://arxiv.org/abs/2508.00816. 2025.
+
+In review article [2]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process with Application to Photovoltaic Energy Storage". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. 2026.
 
 Some related works: <br> 
 https://doi.org/10.1016/j.comcom.2025.108273<br>
 https://ieeexplore.ieee.org/abstract/document/10770514/ <br>
 https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling <br>
 https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
+
 
 
 
