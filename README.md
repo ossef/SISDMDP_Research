@@ -12,17 +12,35 @@ Tree of the most important files and folder in the project's repository :
 
 ```
 /
-├───ScreenShots/: contains some screenshots for below explanations
-├─┬─Solve/: contains the source code for the MDP solving
+├─┬─Models/: Stores all Battery SISDMDP models
+│ ├─── Toy_example_Model/   # A small toy example for the Battery SISDMDP model. Used for visual representation of kernel transition graph.
+│ └─┬─ SIMPA_Journal_Model/ # A realistic NREL data-driven SISDMDP, generated with Xborne.
+│   ├─-NREL_Data            # Raw NREL data for different locations (Rabat, Paris, Barcelona, Moscow, Unalaska ...)
+│   ├─-NREL_Extracts        # Extracted discretized distributions from 'NREL_Data' for each city (run 'Dist_gener.py' file)
+│   ├─-NREL_Models          # The Xborne generated SISDMDP models that uses 'NREL_Extracts' distributions (run 'scriptMDP' file)
+│   └─-Dist_gener.py        # Code that transforms raw data from 'NREL_Data' into distributions in 'NREL_Extracts', making it usable by 'scriptMDP'
+│                             in 'NREL_Models'
+│
+├─┬─Solve_SISDMDP/: Contains the source code for the SISDMDP solving
 │ ├── generate_matrix.py        # Generating a SISDMC-SC structured Markov chain to use in "Launcher.py"
 │ ├── gth_full.py               # GTH algorithm: steady-state probability distribution
-│ ├── chiu_classic.py           # Chiu and Feinberg algorithm: for steady-state probability distribution
+│ ├── chiu_classic.py           # Feinberg & Chiu algorithm: for steady-state probability distribution
 │ ├── chiu_ROB.py               # Proposed algorithm (Chiu + Rob-B): for steady-state probability distribution
+│ ├─- Graph.py                  # Reads ".Rii" matrix storage from '/Models' folder, convert to sparse_row
 │ ├── Solve_AVG_DSC_Reward.py   # Solving MDPs: average reward (5 algorithms) and discounted reward (4 algorithms)
 │ │                             # The proposed algorithms are: MRPI + Chiu, MRPI + Chiu+ RobB, and PI + Chiu+ RobB
-│ └──Launcher.py                # Script to run the experiments on synthetic generated SISDMDPs 
+│ └──Launcher.py                # Script to run the experiments :
+│                                 A) Tests scalability of the proposed algorithms on several synthetic SISDMDPs. 
+│                                 B) Reads the NREL data-driven Xborne SISDMDP (from '../Models/SIMPA_Journal_Model/NREL_Models/')
+│                                 C) Solves the NREL data-driven Xborne SISDMDP
+│                                 D) Plots results in "../Results/" folder
+├─── Results/: 
+│       ├─- HeatMaps    # Detailled optimal policy for each state and thershold policy visualisation. 
+│       └──Barplots     # Optimal average measures (energy storage, Delay probability, energy loss) and trade-off analysis for different locations.
+│                         (It includes scatter figures).
 │
-└───README.md                   # Framework description and instructions
+├───ScreenShots/        # Contains some screenshots for below explanations
+└───README.md           # Framework description and instructions
 ```
 
 ## III - Usage 
@@ -84,7 +102,3 @@ https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_a
 https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0ed6b62 (Replace Solve & Create Model)
