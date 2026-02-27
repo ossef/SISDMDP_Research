@@ -112,19 +112,24 @@ The formal description of the data-driven SISDMDP model is described in [2]. To 
 
 ### Data-driven SISDMDP execution and results
 For instance will running the four scenarios in [2] 
- - Agressive DP delay minimization    : r1_by_M= [0,0,0,0],         r2= 0,    r3= -1000
- - Agressive EP overflow minimization : r1_by_M= [0,0,0,0],         r2= -0.5, r3= 0
- - Regime dependent EP selling        : r1_by_M= [0.2,0.4,0.6,0.8], r2= 0,    r3= 0
- - Multi-Objective optimization       : r1_by_M= [0.2,0.4,0.6,0.8], r2= -0.5, r3= -1000
+ 1) Agressive DP delay minimization    : r1_by_M= [0,0,0,0],         r2= 0,    r3= -1000
+ 2) Agressive EP overflow minimization : r1_by_M= [0,0,0,0],         r2= -0.5, r3= 0
+ 3) Regime dependent EP selling        : r1_by_M= [0.2,0.4,0.6,0.8], r2= 0,    r3= 0
+ 4) Multi-Objective optimization       : r1_by_M= [0.2,0.4,0.6,0.8], r2= -0.5, r3= -1000
 
-Using the experiment "ANALYZE=1", we obtain :
-
-<br>
+- Using the experiment "ANALYZE=1" on the four scenarios in Barcelona, we obtain the threshold optimal policy:
 <div align="center">
-    <img src="./Screenshots/Optimal_policy.png" width="800" height="400"/>
+    <img src="ScreenShots/Optimal_policy.png" width="800" height="650"/>
 </div>
 <br>
+along with another heatmap pdf file.
 
+- Using the experiment "ANALYZE=2" on two selected scenarios for different cities, we obtain the following trade-off visualization of released energy, overflow loss, and QoS delay probability:
+<div align="center">
+    <img src="ScreenShots/Cities_Scatter_heatmap.png" width="900" height="650"/>
+</div>
+<br>
+along with detailled barplots for scenario 3) (Top bareplots) and scenario 4).
 
 - [Youssef AIT EL MAHJOUB](https://github.com/ossef)
 - [Salma Alouah](https://github.com/salouah003)
@@ -138,6 +143,7 @@ https://doi.org/10.1016/j.comcom.2025.108273<br>
 https://ieeexplore.ieee.org/abstract/document/10770514/ <br>
 https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling <br>
 https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
+
 
 
 
