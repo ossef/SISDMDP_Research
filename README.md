@@ -2,13 +2,16 @@
 
 ## I - Goal
 
-This framework provides an efficient method for computing the optimal policy in structure-based Markov Decision Processes (MDPs), focusing on a class of problems we define as SISDMDPs (Single Input State Decomposable MDPs), introduced in [1].
-It supports both `average` and `discounted` reward criteria, and csr_sparse models. The SISDMDP framework generalizes the structured models analyzed in previous work <a href="https://github.com/ossef/MDP_Battery" target="_blank"> MDP_Battery </a>, offering a scalable solution suitable for large-scale decomposable decision-making problems.
+This framework provides an efficient method for computing the optimal policy in structure-based Markov Decision Processes (MDPs), focusing on a class of problems we define as SISDMDPs (Single-Input Superstate Decomposable MDPs), introduced in [1].
+
+It supports both average and discounted reward criteria, as well as CSR sparse models. The SISDMDP framework generalizes the structured models analyzed in previous work (<a href="https://github.com/ossef/MDP_Battery" target="_blank">MDP_Battery</a>), offering a scalable solution suitable for large-scale decomposable decision-making problems.
+
+The proposed solution method is applied to a data-driven (<a href="https://pvwatts.nlr.gov/" target="_blank">NREL</a>) PhotoVoltaic energy storage application that optimizes several rewards (energy release, QoS delay, and energy loss). It provides a detailed analysis of the optimal policy and compares optimal performance metrics across different cities with distinct meteorological profiles.
 
 
 ## II - Project architecture
 
-Tree of the most important files and folder in the project's repository :
+Tree of the most important files and folders in the project :
 
 ```
 /
@@ -31,8 +34,8 @@ Tree of the most important files and folder in the project's repository :
 │ │                             # The proposed algorithms are: MRPI + Chiu, MRPI + Chiu+ RobB, and PI + Chiu+ RobB
 │ └──Launcher.py                # Script to run the experiments :
 │                                 A) Tests scalability of the proposed algorithms on several synthetic SISDMDPs. 
-│                                 B) Reads the NREL data-driven Xborne SISDMDP (from '../Models/SIMPA_Journal_Model/NREL_Models/')
-│                                 C) Solves the NREL data-driven Xborne SISDMDP
+│                                 B) Reads the NREL data-driven Xborne SISDMDP model (from '../Models/SIMPA_Journal_Model/NREL_Models/')
+│                                 C) Solves the NREL data-driven Xborne SISDMDP model
 │                                 D) Plots results in "../Results/" folder
 ├─── Results/: 
 │       ├─- HeatMaps    # Detailled optimal policy for each state and thershold policy visualisation. 
@@ -46,7 +49,7 @@ Tree of the most important files and folder in the project's repository :
 ## III - Usage 
 - All Markov Decision Process (MDP) algorithms are implemented in `Solve_AVG_DSC_Reward.py`
 - Markov chain algorithms are implemented in `gth_full.py`, `chiu_classic.py`, and `chiu_ROB.py`
-- `Launcher.py` file contains functions to generate synthetic SISDMDP instances and perform evaluation. It includes two main testing functions:
+- The main launching file is `Launcher.py`, it contains:
     - test_algorithms():
         - Generates a synthetic SISDMDP model using the helper function from `generate_matrix.py`, based on the following parameters :
             - N: number of states
@@ -63,9 +66,15 @@ Tree of the most important files and folder in the project's repository :
         - You can comment/uncomment specific algorithms in the code to customize the test
     - test_confidence_interval_normalized(n_runs):
         - Repeats the test_algorithms() process n_runs times to obtain a 95% confidence interval.
+    - analyze_PV_Model():
+      - Reads the data-driven SISDMDP model (stored in `/Models/SIMPA_Journal_Model/NREL_Model/`)
+      - Solves the model and extracts the optimal policy
+      - Computes and plots average optimal measures, either focusing and details on a single city (ANALYZE=1) or comparing results for different cities (ANALYZE=2).
+      
 
-## IV - Results of ($|A|=200$, $N=5000$, $K=10$) configuration: 
+## IV - Scalability testing of algorithms: 
 
+Results of ($|A|=200$, $N=5000$, $K=10$) configuration: 
 - In Discounted $(\gamma=0.9)$ reward, with `test_algorithms()` function: 
 <br>
 <div align="center">
@@ -88,6 +97,8 @@ Tree of the most important files and folder in the project's repository :
 </div>
 <br>
 
+## V - Data-driven PV energy storage application: 
+
 ##  Contributors
 
 - [Youssef AIT EL MAHJOUB](https://github.com/ossef)
@@ -100,5 +111,6 @@ https://doi.org/10.1016/j.comcom.2025.108273<br>
 https://ieeexplore.ieee.org/abstract/document/10770514/ <br>
 https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling <br>
 https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
+
 
 
