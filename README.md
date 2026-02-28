@@ -16,7 +16,7 @@ Tree of the most important files and folders in the project :
 /
 ├─┬─Models/: Stores all Battery SISDMDP models
 │ ├─── Toy_example_Model/   # Small illustrative SISDMDP used for visualizing the transition kernel structure.
-│ └─┬─ SIMPA_Journal_Model/ # Realistic NREL-based data-driven SISDMDP models generated using (<a href="https://github.com/ossef/XBorne-2017" target="_blank">XBorne</a>).
+│ └─┬─ SIMPA_Journal_Model/ # Realistic NREL-based data-driven SISDMDP models generated using XBorne.
 │   ├─-NREL_Data            # Raw photovoltaic production data for multiple cities (Rabat, Paris, Barcelona, Moscow, Unalaska ...).
 │   ├─-NREL_Extracts        # Extracted discretized distributions derived from 'NREL_Data' for each city (run 'Dist_gener.py' file).
 │   ├─-NREL_Models          # The XBorne generated SISDMDP models that uses 'NREL_Extracts' distributions (run 'scriptMDP' file).
@@ -102,7 +102,7 @@ The formal description of the data-driven SISDMDP model is described in [2]. To 
 
 1) Execute the python code 'Dist_gener.py' in `/Models/SIMPA_Journal_Model/`: this code tranforms the Raw data of each city to discrete units energy distribution for each hour of the day, clustered by four wheater regimes (Very cloudy, Cloudy, Partly cloudy, Clear sky). After execution one can find the distributions in `/Models/SIMPA_Journal_Model/NREL_Extracts`. To test different scenarios, one can modify parameters in header part as Packets size and active hours interval. The average execution time (M1 laptop) is ~ 80 seconds, that inlcudes distributions generations for 11 cities.
 
-2) Execute 'scriptMDP' file in `/Models/SIMPA_Journal_Model/NREL_Model`: this script generates actions (generActions.py) then uses the C code of XBorne framework to generate the data-driven SISDMDP based on distributions in `/Models/SIMPA_Journal_Model/NREL_Extracts`. After execution, the ready to solve models are therefore stored in `/Models/SIMPA_Journal_Model/NREL_Model` in cities named folders. Due to GitHub size limitations, only Athens and Barcelona models are included (full project size 20 GB). To test different scenarios, one can modify the Buffersize or actions generations file. However, to alter the kernel structure of the MDP, manipulation of XBorne is required, particularly with 'fun.c' and 'const.h' file, which encodes the structure of a Markov Chain, including the description of states, various events, transitions, and their probabilities. The average execution time of this script is ~ 5 minutes for 11 cities where each model contains 56 actions, each action describe ~ 45,000 states, ~ 250,000 transitions, and 184 superstates.
+2) Execute 'scriptMDP' file in `/Models/SIMPA_Journal_Model/NREL_Model`: this script generates actions (generActions.py) then uses the C code of <a href="https://github.com/ossef/XBorne-2017" target="_blank">XBorne</a> framework to generate the data-driven SISDMDP based on distributions in `/Models/SIMPA_Journal_Model/NREL_Extracts`. After execution, the ready to solve models are therefore stored in `/Models/SIMPA_Journal_Model/NREL_Model` in cities named folders. Due to GitHub size limitations, only Athens and Barcelona models are included (full project size 20 GB). To test different scenarios, one can modify the Buffersize or actions generations file. However, to alter the kernel structure of the MDP, manipulation of XBorne is required, particularly with 'fun.c' and 'const.h' file, which encodes the structure of a Markov Chain, including the description of states, various events, transitions, and their probabilities. The average execution time of this script is ~ 5 minutes for 11 cities where each model contains 56 actions, each action describe ~ 45,000 states, ~ 250,000 transitions, and 184 superstates.
 
 3) Verify that `/Models/SIMPA_Journal_Model/NREL_Model` includes models. One can run two types of experiments in 'analyze_PV_Model()' function of  `/Solve_SISDMDP/Launcher.py`. First, define the rewards variables r1_by_M (Energy Packet release), r2 (EP-Energy-Packet loss penalty) and r3 (DP-Data-Packet delay) then set the experiment mode:
    - ANALYZE = 1: fixe the name of a SISDMDP city model and run `Launcher.py` file. The detailled results of the optimal policy will be stored in `/Results/HeatMaps/`.
@@ -132,26 +132,28 @@ Cross-city average performance comparison and trade-off analysis of released ene
 along with detailled barplots for "Regime dependent EP selling" scenario
 <br>
 <div align="center">
-    <img src="ScreenShots/Barplot_Scen3.png" width="900" height="650"/>
+    <img src="ScreenShots/Barplot_Scen3.png" width="920" height="670"/>
 </div>
 and "Balanced Multi-Objective Optimization" scenario
 <div align="center">
-    <img src="ScreenShots/Barplot_Scen4.png" width="900" height="650"/>
+    <img src="ScreenShots/Barplot_Scen4.png" width="920" height="670"/>
 </div>
 
 ##  Contributors
 - [Youssef AIT EL MAHJOUB](https://github.com/ossef)
 - [Salma Alouah](https://github.com/salouah003)
 
-Preprint [1]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. https://arxiv.org/abs/2508.00816. 2025.
+Preprint [1]: "Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. https://arxiv.org/abs/2508.00816. 2025.
 
-Under review [2]: <br>"Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process with Application to Photovoltaic Energy Storage". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. 2026.
+Under review [2]: "Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process with Application to Photovoltaic Energy Storage". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. 2026.
 
 Some related works: <br> 
-https://doi.org/10.1016/j.comcom.2025.108273<br>
-https://ieeexplore.ieee.org/abstract/document/10770514/ <br>
-https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling <br>
-https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network 
+<a href="https://doi.org/10.1016/j.comcom.2025.108273" target="_blank">ComCom2025 journal: data-driven PV model and structured MDPs</a> <br>
+<a href="https://ieeexplore.ieee.org/abstract/document/10770514/" target="_blank">WiMob2024 conference: On/Off PV model and structured MDPs</a> <br>
+<a href="https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling" target="_blank">ValueTools2019 conference: NGreen optical container and structured Markov chain</a> <br>
+<a href="https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network " target="_blank">WiMob2018 conference: NGreen optical network</a> 
+
+
 
 
 
