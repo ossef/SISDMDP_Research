@@ -145,13 +145,14 @@ and "Balanced Multi-Objective Optimization" scenario
 
 Preprint [1]: "Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. https://arxiv.org/abs/2508.00816. 2025.
 
-Under review [2]: "Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process with Application to Photovoltaic Energy Storage". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. 2026.
+Submitted [2]: "Efficient Solving of Large Single Input Superstate Decomposable Markovian Decision Process with Application to Photovoltaic Energy Storage". Youssef AIT EL MAHJOUB, Jean-Michel FOURNEAU and Salma ALOUAH. 2026.
 
 Some related works: <br> 
 <a href="https://doi.org/10.1016/j.comcom.2025.108273" target="_blank">ComCom2025 journal: data-driven PV model and structured MDPs</a> <br>
 <a href="https://ieeexplore.ieee.org/abstract/document/10770514/" target="_blank">WiMob2024 conference: On/Off PV model and structured MDPs</a> <br>
 <a href="https://www.researchgate.net/publication/331334323_A_numerical_approach_of_the_analysis_of_optical_container_filling" target="_blank">ValueTools2019 conference: NGreen optical container and structured Markov chain</a> <br>
 <a href="https://www.researchgate.net/publication/329954281_Performance_and_energy_efficiency_analysis_in_NGREEN_optical_network " target="_blank">WiMob2018 conference: NGreen optical network</a> 
+
 
 
 
